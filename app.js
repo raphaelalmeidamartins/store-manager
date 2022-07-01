@@ -10,7 +10,7 @@ app.get('/', (_request, response) => {
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima
-// você deve usar o arquivo index.js para executar sua aplicação 
+// você deve usar o arquivo index.js para executar sua aplicação
 
 app.use(express.json());
 
@@ -20,6 +20,9 @@ app.use((err, _req, res, _next) => {
   const { name, message } = err;
   switch (name) {
     case 'ValidationError':
+      if (message.includes('length')) {
+        return res.status(422).json({ message });
+      }
       res.status(400).json({ message });
       break;
     case 'NotFoundError':

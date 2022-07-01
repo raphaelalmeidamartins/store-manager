@@ -35,6 +35,15 @@ const productsModel = {
     const [products] = await db.query(sqlQuery);
     return products.sort((prev, curr) => prev.id - curr.id);
   },
+  async add(data) {
+    const sqlQuery = `
+      INSERT INTO StoreManager.products (name)
+      VALUES
+        (?);
+    `;
+    const [{ insertId }] = await db.query(sqlQuery, [data.name]);
+    return insertId;
+  },
 };
 
 module.exports = { productsModel, db };

@@ -12,9 +12,15 @@ const productsController = {
 
     res.status(200).json(product);
   },
-  async list(req, res) {
+  async list(_req, res) {
     const products = await productsService.list();
     res.json(products);
+  },
+  async add(req, res) {
+    const data = await productsService.validate.bodyAdd(req.body);
+    const id = await productsService.add(data);
+    const product = await productsService.get(id);
+    res.status(201).json(product);
   },
 };
 
