@@ -1,6 +1,7 @@
 const { expect, use } = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const sinon = require('sinon');
+const NotFoundError = require('../../../errors/NotFoundError');
 const { productsModel } = require('../../../models/productsModels');
 const productsService = require('../../../services/productsService');
 
@@ -19,7 +20,9 @@ describe('Test the productsService layer', () => {
       });
 
       it('should throw an error if the `id` is not valid', () => {
-        expect(() => productsService.validate.paramsId({ id: 'a' })).to.throw('"id" must be a number'); 
+        expect(() => productsService.validate.paramsId({ id: 'a' })).to.throw(
+          '"id" must be a number'
+        );
       });
     });
   });
@@ -33,7 +36,9 @@ describe('Test the productsService layer', () => {
 
     it('should throw not found error if the product corresponding to the provided `id`does not exists', async () => {
       sinon.stub(productsModel, 'exists').resolves(false);
-      expect(async () => await productsService.exists(1)).to.throw('Product not found');
+
+      return expect(productsService.exists(1))
+        .to.eventually.be.rejectedWith('Product not found');
     });
   });
 
