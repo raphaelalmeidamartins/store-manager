@@ -43,8 +43,9 @@ describe('Test the productsController layer', () => {
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub();
 
-      return expect(productsController.get(req, res))
-        .to.eventually.be.rejectedWith(ValidationError);
+      return expect(
+        productsController.get(req, res)
+      ).to.eventually.be.rejectedWith(ValidationError);
     });
   });
 
@@ -85,6 +86,28 @@ describe('Test the productsController layer', () => {
 
       expect(res.status.calledWith(200)).to.be.true;
       expect(res.json.calledWith(mockedProducts)).to.be.true;
+    });
+  });
+
+  describe('Check the `add` method', () => {
+    it('should respond the request with the inserterd product', async () => {
+      const req = {};
+      const res = {};
+
+      req.body = { name: 'Caixa de pandora' };
+      const id = 2;
+      const product = { id, ...req.body }
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      sinon.stub(productsService, 'add').resolves(id);
+      sinon.stub(productsService, 'get').resolves(product);
+
+      await productsController.add(req, res);
+
+      expect(res.status.calledWith(201)).to.be.true;
+      expect(res.json.calledWith(product)).to.be.true;
     });
   });
 });

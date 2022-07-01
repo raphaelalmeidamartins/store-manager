@@ -37,8 +37,9 @@ describe('Test the productsService layer', () => {
     it('should throw not found error if the product corresponding to the provided `id`does not exists', async () => {
       sinon.stub(productsModel, 'exists').resolves(false);
 
-      return expect(productsService.exists(1))
-        .to.eventually.be.rejectedWith('Product not found');
+      return expect(productsService.exists(1)).to.eventually.be.rejectedWith(
+        'Product not found'
+      );
     });
   });
 
@@ -74,6 +75,15 @@ describe('Test the productsService layer', () => {
       sinon.stub(productsModel, 'list').resolves(mockedProducts);
       const product = await productsService.list();
       expect(product).to.deep.equal(mockedProducts);
+    });
+  });
+
+  describe('Check the `add` method', () => {
+    it('should return the insert id', async () => {
+      const insertId = 3;
+      sinon.stub(productsModel, 'add').resolves(insertId);
+      const id = await productsService.add({ name: 'Caixa de pandora' });
+      expect(id).to.equal(insertId);
     });
   });
 });

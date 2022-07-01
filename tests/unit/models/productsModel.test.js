@@ -19,7 +19,7 @@ describe('Test the productsModel layer', () => {
     });
 
     it('should return `false` if the product corresponding to the provided `id`does not exists', async () => {
-      sinon.stub(db, 'query').resolves([[undefined]])
+      sinon.stub(db, 'query').resolves([[undefined]]);
       const exists = await productsModel.exists(1);
       expect(exists).to.be.false;
     });
@@ -57,6 +57,15 @@ describe('Test the productsModel layer', () => {
       sinon.stub(db, 'query').resolves([mockedProducts]);
       const product = await productsModel.list();
       expect(product).to.deep.equal(mockedProducts);
+    });
+  });
+
+  describe('Check the `add` method', () => {
+    it('should return the insert id', async () => {
+      const insertId = 3;
+      sinon.stub(db, 'query').resolves([{ insertId }]);
+      const id = await productsModel.add({ name: 'Caixa de pandora' });
+      expect(id).to.equal(insertId);
     });
   });
 });
