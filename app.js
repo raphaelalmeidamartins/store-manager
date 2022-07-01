@@ -1,5 +1,6 @@
 const express = require('express');
 const productsRoutes = require('./routes/productsRoutes');
+const salesRoutes = require('./routes/salesRoutes');
 
 const app = express();
 
@@ -15,12 +16,13 @@ app.get('/', (_request, response) => {
 app.use(express.json());
 
 app.use('/products', productsRoutes);
+app.use('/sales', salesRoutes);
 
 app.use((err, _req, res, _next) => {
   const { name, message } = err;
   switch (name) {
     case 'ValidationError':
-      if (message.includes('length')) {
+      if (message.includes('length') || message.includes('greater than')) {
         return res.status(422).json({ message });
       }
       res.status(400).json({ message });
