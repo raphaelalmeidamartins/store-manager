@@ -15,8 +15,8 @@ const productsModel = {
       FROM StoreManager.products
       WHERE id = ?;
     `;
-    const [[products]] = await db.query(sqlQuery, [id]);
-    return Boolean(products);
+    const [[product]] = await db.query(sqlQuery, [id]);
+    return Boolean(product);
   },
   async get(id) {
     const sqlQuery = `
@@ -24,8 +24,8 @@ const productsModel = {
       FROM StoreManager.products
       WHERE id = ?;
     `;
-    const [[products]] = await db.query(sqlQuery, [id]);
-    return products;
+    const [[product]] = await db.query(sqlQuery, [id]);
+    return product;
   },
   async list() {
     const sqlQuery = `
@@ -37,4 +37,4 @@ const productsModel = {
   },
 };
 
-module.exports = productsModel;
+module.exports = { productsModel, db };

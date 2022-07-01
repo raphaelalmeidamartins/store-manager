@@ -1,6 +1,7 @@
 const Joi = require('joi');
-const productsModel = require('../models/productsModels');
+const { productsModel } = require('../models/productsModels');
 const validateData = require('./validators');
+const NotFoundError = require('../errors/NotFoundError');
 
 const productsService = {
   validate: {
@@ -12,7 +13,7 @@ const productsService = {
   },
   async exists(id) {
     const exists = await productsModel.exists(id);
-    return exists;
+    if (!exists) throw new NotFoundError('Product not found');
   },
   async get(id) {
     const product = await productsModel.get(id);
