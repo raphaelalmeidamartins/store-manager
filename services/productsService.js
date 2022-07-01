@@ -1,5 +1,5 @@
 const Joi = require('joi');
-const { productsModel } = require('../models/productsModels');
+const productsModel = require('../models/productsModel');
 const validateData = require('./validators');
 const NotFoundError = require('../errors/NotFoundError');
 

@@ -2,7 +2,7 @@ const { expect, use } = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const sinon = require('sinon');
 const NotFoundError = require('../../../errors/NotFoundError');
-const { productsModel } = require('../../../models/productsModels');
+const productsModel = require('../../../models/productsModel');
 const productsService = require('../../../services/productsService');
 
 use(chaiAsPromised);

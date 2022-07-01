@@ -1,8 +1,8 @@
 const { expect, use } = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const sinon = require('sinon');
-const { db } = require('../../../models/productsModels');
-const { productsModel } = require('../../../models/productsModels');
+const db = require('../../../models/db');
+const productsModel = require('../../../models/productsModel');
 
 use(chaiAsPromised);
 
