@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const salesModel = require('../models/salesModel');
-const salesProductsModel = require('../models/salesProducsModel');
+const salesProductsModel = require('../models/salesProductsModel');
 const validateData = require('./validators');
 const NotFoundError = require('../errors/NotFoundError');
 

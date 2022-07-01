@@ -1,13 +1,22 @@
 const db = require('./db');
 
 const salesProductsModel = {
-  async get(saleId) {
+  async getBySaleId(saleId) {
     const sqlQuery = `
       SELECT *
       FROM StoreManager.sales_products
       WHERE sale_id = ?;
     `;
     const [saleArray] = await db.query(sqlQuery, [saleId]);
+    return saleArray;
+  },
+  async getByProductId(productId) {
+    const sqlQuery = `
+      SELECT *
+      FROM StoreManager.sales_products
+      WHERE product_id = ?;
+    `;
+    const [saleArray] = await db.query(sqlQuery, [productId]);
     return saleArray;
   },
   async list() {
