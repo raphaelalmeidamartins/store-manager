@@ -14,7 +14,7 @@ const productsController = {
   },
   async list(_req, res) {
     const products = await productsService.list();
-    res.json(products);
+    res.status(200).json(products);
   },
   async add(req, res) {
     const data = await productsService.validate.bodyAdd(req.body);
