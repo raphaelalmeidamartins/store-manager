@@ -26,5 +26,52 @@
     "headers": [],
     "params": [],
     "tests": []
+  },
+  {
+    "_id": "b99c6666-cb9a-4dae-8af3-e776c45ea7a7",
+    "colId": "da8a24ed-2eed-4496-b29a-941b71d10236",
+    "containerId": "",
+    "name": "listSales",
+    "url": "http://localhost:3000/sales",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-07-01T18:59:17.184Z",
+    "modified": "2022-07-01T19:00:04.409Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "c2591a05-fda5-4269-a30c-369802dd463d",
+    "colId": "da8a24ed-2eed-4496-b29a-941b71d10236",
+    "containerId": "",
+    "name": "getSaleById",
+    "url": "http://localhost:3000/sales/1",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-07-01T18:59:49.791Z",
+    "modified": "2022-07-01T18:59:58.639Z",
+    "headers": [],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "2a1c9822-7287-4412-be2c-707849da618c",
+    "colId": "da8a24ed-2eed-4496-b29a-941b71d10236",
+    "containerId": "",
+    "name": "addSale",
+    "url": "http://localhost:3000/sales",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2022-07-01T19:00:48.718Z",
+    "modified": "2022-07-01T20:23:51.484Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "[\n  {\n    \"productId\": 1,\n    \"quantity\": 1\n  },\n  {\n    \"productId\": 99999,\n    \"quantity\": 5\n  }\n]",
+      "form": []
+    },
+    "tests": []
   }
 ]
