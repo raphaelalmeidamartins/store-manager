@@ -36,6 +36,16 @@ const productsController = {
     await productsService.remove(id);
     res.sendStatus(204);
   },
+  async search(req, res) {
+    const { q: searchTerm } = req.query;
+    let products;
+    if (searchTerm) {
+      products = await productsService.search(searchTerm);
+    } else {
+      products = await productsService.list();
+    }
+    res.status(200).json(products);
+  },
 };
 
 module.exports = productsController;

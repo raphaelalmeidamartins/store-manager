@@ -53,6 +53,15 @@ const productsModel = {
     const [{ affectedRows }] = await db.query(sqlQuery, [id]);
     return Boolean(affectedRows);
   },
+  async search(searchTerm) {
+    const sqlQuery = `
+      SELECT *
+      FROM StoreManager.products
+      WHERE name REGEXP ?;
+    `;
+    const [products] = await db.query(sqlQuery, [searchTerm]);
+    return products.sort((prev, curr) => prev.id - curr.id);
+  },
 };
 
 module.exports = productsModel;
