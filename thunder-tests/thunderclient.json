@@ -73,5 +73,43 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "d66cdd06-7ba9-44c2-99ec-f680c9115d9c",
+    "colId": "d3719841-27e2-4151-bbb9-ea5d5d400bfb",
+    "containerId": "",
+    "name": "editProduct",
+    "url": "http://localhost:3000/products/1",
+    "method": "PUT",
+    "sortNum": 30000,
+    "created": "2022-07-02T01:50:03.358Z",
+    "modified": "2022-07-02T01:51:02.008Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"name\": \"Sonic Unleashed PS3\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "dc8bbece-d01d-44b1-81c1-687a67407521",
+    "colId": "d3719841-27e2-4151-bbb9-ea5d5d400bfb",
+    "containerId": "",
+    "name": "addProduct",
+    "url": "http://localhost:3000/products",
+    "method": "POST",
+    "sortNum": 40000,
+    "created": "2022-07-02T01:54:43.524Z",
+    "modified": "2022-07-02T01:55:24.252Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"name\": \"Mario Galaxy 2 Wii\"\n}",
+      "form": []
+    },
+    "tests": []
   }
 ]
