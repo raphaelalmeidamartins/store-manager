@@ -86,4 +86,13 @@ describe('Test the productsService layer', () => {
       expect(id).to.equal(insertId);
     });
   });
+
+  describe('Check the `edit` method', () => {
+    it('should return true if it is succesful', async () => {
+      const id = 1;
+      sinon.stub(productsModel, 'add').resolves(true);
+      const done = await productsService.edit(id, { name: 'Mario Galaxy 2 Wii' });
+      expect(done).to.be.true;
+    });
+  });
 });
