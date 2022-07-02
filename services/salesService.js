@@ -52,12 +52,13 @@ const salesService = {
   },
   async add(data) {
     const saleId = await salesModel.add();
-    data.forEach((currProduct) =>
+    const result = data.map((currProduct) =>
       salesProductsModel.add(
         currProduct.productId,
         saleId,
         currProduct.quantity,
       ));
+    await Promise.all(result);
     return saleId;
   },
 };
