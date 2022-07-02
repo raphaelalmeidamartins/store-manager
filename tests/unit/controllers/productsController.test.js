@@ -153,4 +153,87 @@ describe('Test the productsController layer', () => {
       expect(res.sendStatus.calledWith(204)).to.be.true;
     });
   });
+
+  describe('Check the `search` method', () => {
+    it('should return an array of product objects corresponding to the search term', async () => {
+      const mockedProducts = [
+        { id: 1, name: 'Martelo de Tor' },
+        { id: 2, name: 'Sapatos do Sonic' },
+        { id: 3, name: 'Caixa de pandora' },
+      ];
+      const searchTerm = 'thor';
+      const searchProducts = mockedProducts.filter(({ name }) =>
+        name.match(new RegExp(searchTerm, 'i'))
+      );
+
+      const req = {};
+      const res = {};
+
+      req.query = { q: searchTerm };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      sinon.stub(productsService, 'list').resolves(mockedProducts);
+      sinon.stub(productsService, 'search').resolves(searchProducts);
+
+      await productsController.search(req, res);
+
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(searchProducts)).to.be.true;
+    });
+
+    it('should return an empty array if there is no product corresponding to the search term', async () => {
+      const mockedProducts = [
+        { id: 1, name: 'Martelo de Tor' },
+        { id: 2, name: 'Sapatos do Sonic' },
+        { id: 3, name: 'Caixa de pandora' },
+      ];
+      const searchTerm = 'raphael';
+      const searchProducts = mockedProducts.filter(({ name }) =>
+        name.match(new RegExp(searchTerm, 'i'))
+      );
+
+      const req = {};
+      const res = {};
+
+      req.query = { q: searchTerm };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      sinon.stub(productsService, 'list').resolves(mockedProducts);
+      sinon.stub(productsService, 'search').resolves(searchProducts);
+
+      await productsController.search(req, res);
+
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(searchProducts)).to.be.true;
+    });
+
+    it('should list all the products if the search team is empty', async () => {
+      const mockedProducts = [
+        { id: 1, name: 'Martelo de Tor' },
+        { id: 2, name: 'Sapatos do Sonic' },
+        { id: 3, name: 'Caixa de pandora' },
+      ];
+      const searchTerm = '';
+
+      const req = {};
+      const res = {};
+
+      req.query = { q: searchTerm };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      sinon.stub(productsService, 'list').resolves(mockedProducts);
+      sinon.stub(productsService, 'search').resolves(mockedProducts);
+
+      await productsController.search(req, res);
+
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(mockedProducts)).to.be.true;
+    });
+  });
 });

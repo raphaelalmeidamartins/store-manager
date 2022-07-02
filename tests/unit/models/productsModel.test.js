@@ -104,4 +104,36 @@ describe('Test the productsModel layer', () => {
       expect(done).to.be.false;
     });
   });
+
+  describe('Check the `search` method', () => {
+    it('should return an array of product objects corresponding to the search term', async () => {
+      const mockedProducts = [
+        { id: 1, name: 'Martelo de Tor' },
+        { id: 2, name: 'Sapatos do Sonic' },
+        { id: 3, name: 'Caixa de pandora' },
+      ];
+      const searchTerm = 'thor';
+      const searchProducts = mockedProducts.filter(({ name }) =>
+        name.match(new RegExp(searchTerm, 'i'))
+      );
+      sinon.stub(db, 'query').resolves([searchProducts]);
+      const products = await productsModel.search(searchTerm);
+      expect(products).to.deep.equal(searchProducts);
+    });
+
+    it('should return an empty array if there is no product corresponding to the search term', async () => {
+      const mockedProducts = [
+        { id: 1, name: 'Martelo de Tor' },
+        { id: 2, name: 'Sapatos do Sonic' },
+        { id: 3, name: 'Caixa de pandora' },
+      ];
+      const searchTerm = 'raphael';
+      const searchProducts = mockedProducts.filter(({ name }) =>
+        name.match(new RegExp(searchTerm, 'i'))
+      );
+      sinon.stub(db, 'query').resolves([searchProducts]);
+      const products = await productsModel.search(searchTerm);
+      expect(products).to.deep.equal(searchProducts);
+    });
+  });
 });
