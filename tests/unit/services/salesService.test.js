@@ -27,65 +27,65 @@ describe('Test the salesService layer', () => {
       });
     });
 
-    describe('Check the `bodyAdd` method', () => {
+    describe('Check the `body` method', () => {
       it('should return a valid object if the `productId` is valid', () => {
         const body = [{ productId: 1, quantity: 5 }];
-        const object = salesService.validate.bodyAdd(body);
+        const object = salesService.validate.body(body);
         expect(object).to.deep.equal(body);
       });
 
       it('should throw an error if the `productId` is not a number', () => {
         const body = [{ productId: 'abc', quantity: 5 }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"productId" must be a number'
         );
       });
 
       it('should throw an error if the `productId` is not positive', () => {
         const body = [{ productId: -1, quantity: 5 }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"productId" must be a positive number'
         );
       });
 
       it('should throw an error if the `productId` is not an integer', () => {
         const body = [{ productId: 1.2, quantity: 5 }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"productId" must be an integer'
         );
       });
 
       it('should throw an error if the `productId` is not provided', () => {
         const body = [{ quantity: 5 }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"productId" is required'
         );
       });
 
       it('should throw an error if the `quantity` is not a number', () => {
         const body = [{ productId: 5, quantity: 'abc' }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"quantity" must be a number'
         );
       });
 
       it('should throw an error if the `quantity` is not greater than or equal to 1', () => {
         const body = [{ productId: 1, quantity: -5 }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"quantity" must be greater than or equal to 1'
         );
       });
 
       it('should throw an error if the `quantity` is not an integer', () => {
         const body = [{ productId: 1, quantity: 5.2 }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"quantity" must be an integer'
         );
       });
 
       it('should throw an error if the `quantity` is not provided', () => {
         const body = [{ productId: 5 }];
-        expect(() => salesService.validate.bodyAdd(body)).to.throw(
+        expect(() => salesService.validate.body(body)).to.throw(
           '"quantity" is required'
         );
       });
@@ -189,7 +189,7 @@ describe('Test the salesService layer', () => {
           quantity: 2,
         },
         {
-          productId: 99999,
+          productId: 2,
           quantity: 5,
         },
       ];
@@ -202,6 +202,42 @@ describe('Test the salesService layer', () => {
       const id = await salesService.add(data);
 
       expect(id).to.equal(saleId);
+    });
+  });
+
+  describe('Check the `edit` method', () => {
+    it('should return true if it is succesful', async () => {
+      const saleId = 1;
+      const updates = [
+        {
+          productId: 1,
+          quantity: 2,
+        },
+        {
+          productId: 99999,
+          quantity: 5,
+        },
+      ];
+      sinon.stub(salesProductsModel, 'remove');
+      sinon.stub(salesProductsModel, 'add');
+      const done = await salesService.edit(saleId, updates);
+      expect(done).to.be.true;
+    });
+  });
+
+  describe('Check the `remove` method', () => {
+    it('should return true if it is succesful', async () => {
+      const id = 1;
+      sinon.stub(salesModel, 'remove').resolves(true);
+      const done = await salesService.remove(id);
+      expect(done).to.be.true;
+    });
+
+    it('should return false if it is not succesful', async () => {
+      const id = 1;
+      sinon.stub(salesModel, 'remove').resolves(false);
+      const done = await salesService.remove(id);
+      expect(done).to.be.false;
     });
   });
 });

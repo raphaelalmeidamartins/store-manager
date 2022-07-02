@@ -71,4 +71,22 @@ describe('Test the salesProductsModel layer', () => {
       expect(id).to.equal(saleId);
     });
   });
+
+  describe('Check the `remove` method', () => {
+    it('should return true if it is succesful', async () => {
+      const affectedRows = 1;
+      const id = 1;
+      sinon.stub(db, 'query').resolves([{ affectedRows }]);
+      const done = await salesProductsModel.remove(id);
+      expect(done).to.be.true;
+    });
+
+    it('should return false if it is not succesful', async () => {
+      const affectedRows = 0;
+      const id = 1;
+      sinon.stub(db, 'query').resolves([{ affectedRows }]);
+      const done = await salesProductsModel.remove(id);
+      expect(done).to.be.false;
+    });
+  });
 });

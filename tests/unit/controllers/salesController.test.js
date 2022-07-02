@@ -125,4 +125,61 @@ describe('Test the salesController layer', () => {
       expect(res.json.calledWith(sale)).to.be.true;
     });
   });
+
+  describe('Check the `edit` method', () => {
+    it('should respond the request with the inserterd sale', async () => {
+      const req = {};
+      const res = {};
+
+      req.params = { id: 1 };
+      req.body = [
+        {
+          productId: 1,
+          quantity: 1,
+        },
+        {
+          productId: 3,
+          quantity: 5,
+        },
+      ];
+      const sale = {
+        saleId: req.params.id,
+        itemsUpdated: req.body.sort(
+          (prev, curr) => prev.productId - curr.productId
+        ),
+      };
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      sinon.stub(productsService, 'exists');
+      sinon.stub(salesService, 'exists');
+      sinon.stub(salesService, 'edit');
+
+      await salesController.edit(req, res);
+
+      expect(res.status.calledWith(200)).to.be.true;
+      expect(res.json.calledWith(sale)).to.be.true;
+    });
+  });
+
+  describe('Check the `remove` method', () => {
+    it('should send 204 status if it is succesful', async () => {
+      const req = {};
+      const res = {};
+
+      req.params = { id: 1 };
+
+      res.status = sinon.stub().returns(res);
+      res.sendStatus = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      sinon.stub(salesService, 'exists');
+      sinon.stub(salesService, 'remove').resolves(true);
+
+      await salesController.remove(req, res);
+
+      expect(res.sendStatus.calledWith(204)).to.be.true;
+    });
+  });
 });

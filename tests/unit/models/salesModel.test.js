@@ -13,7 +13,9 @@ describe('Test the salesModel layer', () => {
 
   describe('Check the `exists` method', () => {
     it('should return `true` if the sale corresponding to the provided `id` exists', async () => {
-      sinon.stub(db, 'query').resolves([[{ id: 1, date: new Date('09/08/2019') }]]);
+      sinon
+        .stub(db, 'query')
+        .resolves([[{ id: 1, date: new Date('09/08/2019') }]]);
       const exists = await salesModel.exists(1);
       expect(exists).to.be.true;
     });
@@ -66,6 +68,24 @@ describe('Test the salesModel layer', () => {
       sinon.stub(db, 'query').resolves([{ insertId }]);
       const id = await salesModel.add({ name: 'Caixa de pandora' });
       expect(id).to.equal(insertId);
+    });
+  });
+
+  describe('Check the `remove` method', () => {
+    it('should return true if it is succesful', async () => {
+      const affectedRows = 1;
+      const id = 1;
+      sinon.stub(db, 'query').resolves([{ affectedRows }]);
+      const done = await salesModel.remove(id);
+      expect(done).to.be.true;
+    });
+
+    it('should return false if it is not succesful', async () => {
+      const affectedRows = 0;
+      const id = 1;
+      sinon.stub(db, 'query').resolves([{ affectedRows }]);
+      const done = await salesModel.remove(id);
+      expect(done).to.be.false;
     });
   });
 });
