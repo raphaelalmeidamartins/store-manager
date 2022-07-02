@@ -123,6 +123,7 @@ describe('Test the productsController layer', () => {
       res.status = sinon.stub().returns(res);
       res.json = sinon.stub();
 
+      sinon.stub(productsService, 'exists');
       sinon.stub(productsService, 'edit').resolves(true);
       sinon.stub(productsService, 'get').resolves(product);
 
@@ -130,6 +131,26 @@ describe('Test the productsController layer', () => {
 
       expect(res.status.calledWith(200)).to.be.true;
       expect(res.json.calledWith(product)).to.be.true;
+    });
+  });
+
+  describe('Check the `remove` method', () => {
+    it('should send 204 status if it is succesful', async () => {
+      const req = {};
+      const res = {};
+
+      req.params = { id: 1 };
+
+      res.status = sinon.stub().returns(res);
+      res.sendStatus = sinon.stub().returns(res);
+      res.json = sinon.stub();
+
+      sinon.stub(productsService, 'exists');
+      sinon.stub(productsService, 'remove').resolves(true);
+
+      await productsController.remove(req, res);
+
+      expect(res.sendStatus.calledWith(204)).to.be.true;
     });
   });
 });

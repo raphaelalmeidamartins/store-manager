@@ -76,5 +76,32 @@ describe('Test the productsModel layer', () => {
       const done = await productsModel.edit({ name: 'Sonic Unleashed PS3' });
       expect(done).to.be.true;
     });
+
+    it('should return false if it is not succesful', async () => {
+      const affectedRows = 0;
+      sinon.stub(db, 'query').resolves([{ affectedRows }]);
+      const done = await productsModel.edit({
+        name: 'Sonic Unleashed PS3',
+      });
+      expect(done).to.be.false;
+    });
+  });
+
+  describe('Check the `remove` method', () => {
+    it('should return true if it is succesful', async () => {
+      const affectedRows = 1;
+      const id = 1;
+      sinon.stub(db, 'query').resolves([{ affectedRows }]);
+      const done = await productsModel.remove(id);
+      expect(done).to.be.true;
+    });
+
+    it('should return false if it is not succesful', async () => {
+      const affectedRows = 0;
+      const id = 1;
+      sinon.stub(db, 'query').resolves([{ affectedRows }]);
+      const done = await productsModel.remove(id);
+      expect(done).to.be.false;
+    });
   });
 });

@@ -90,9 +90,36 @@ describe('Test the productsService layer', () => {
   describe('Check the `edit` method', () => {
     it('should return true if it is succesful', async () => {
       const id = 1;
-      sinon.stub(productsModel, 'add').resolves(true);
-      const done = await productsService.edit(id, { name: 'Mario Galaxy 2 Wii' });
+      sinon.stub(productsModel, 'edit').resolves(true);
+      const done = await productsService.edit(id, {
+        name: 'Mario Galaxy 2 Wii',
+      });
       expect(done).to.be.true;
+    });
+
+    it('should return false if it is not succesful', async () => {
+      const id = 1;
+      sinon.stub(productsModel, 'edit').resolves(false);
+      const done = await productsService.edit(id, {
+        name: 'Mario Galaxy 2 Wii',
+      });
+      expect(done).to.be.false;
+    });
+  });
+
+  describe('Check the `remove` method', () => {
+    it('should return true if it is succesful', async () => {
+      const id = 1;
+      sinon.stub(productsModel, 'remove').resolves(true);
+      const done = await productsService.remove(id);
+      expect(done).to.be.true;
+    });
+
+    it('should return false if it is not succesful', async () => {
+      const id = 1;
+      sinon.stub(productsModel, 'remove').resolves(false);
+      const done = await productsService.remove(id);
+      expect(done).to.be.false;
     });
   });
 });
