@@ -30,6 +30,12 @@ const productsController = {
 
     res.status(200).json(product);
   },
+  async remove(req, res) {
+    const { id } = await productsService.validate.paramsId(req.params);
+    await productsService.exists(id);
+    await productsService.remove(id);
+    res.sendStatus(204);
+  },
 };
 
 module.exports = productsController;

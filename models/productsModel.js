@@ -45,6 +45,14 @@ const productsModel = {
     const [{ affectedRows }] = await db.query(sqlQuery, [updates, id]);
     return Boolean(affectedRows);
   },
+  async remove(id) {
+    const sqlQuery = `
+      DELETE FROM StoreManager.products
+      WHERE id = ?;
+    `;
+    const [{ affectedRows }] = await db.query(sqlQuery, [id]);
+    return Boolean(affectedRows);
+  },
 };
 
 module.exports = productsModel;
