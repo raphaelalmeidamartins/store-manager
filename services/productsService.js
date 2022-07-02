@@ -10,7 +10,7 @@ const productsService = {
         id: Joi.number().required().positive().integer(),
       }),
     ),
-    bodyAdd: validateData(
+    body: validateData(
       Joi.object({
         name: Joi.string().required().min(5),
       }),
@@ -31,8 +31,12 @@ const productsService = {
     return products;
   },
   async add(data) {
-   const id = await productsModel.add(data);
-   return id;
+    const id = await productsModel.add(data);
+    return id;
+  },
+  async edit(id, updates) {
+    const done = await productsModel.edit(id, updates);
+    return done;
   },
 };
 
