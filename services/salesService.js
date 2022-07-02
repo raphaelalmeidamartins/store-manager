@@ -11,7 +11,7 @@ const salesService = {
         id: Joi.number().required().positive().integer(),
       }),
     ),
-    bodyAdd: validateData(
+    body: validateData(
       Joi.array().items(
         Joi.object({
           productId: Joi.number().required().positive().integer(),
@@ -60,6 +60,21 @@ const salesService = {
       ));
     await Promise.all(result);
     return saleId;
+  },
+  async edit(saleId, updates) {
+    await salesProductsModel.remove(saleId);
+    const result = updates.map(({ productId, quantity }) =>
+      salesProductsModel.add(
+        productId,
+        saleId,
+        quantity,
+      ));
+    await Promise.all(result);
+    return true;
+  },
+  async remove(id) {
+    const done = await salesModel.remove(id);
+    return done;
   },
 };
 

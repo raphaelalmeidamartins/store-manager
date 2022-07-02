@@ -15,9 +15,10 @@ const salesController = {
     res.status(200).json(sales);
   },
   async add(req, res) {
-    const data = await salesService.validate.bodyAdd(req.body);
+    const data = await salesService.validate.body(req.body);
 
-    const result = data.map(({ productId }) => productsService.exists(productId));
+    const result = data.map(({ productId }) =>
+      productsService.exists(productId));
     await Promise.all(result);
 
     const id = await salesService.add(data);
@@ -26,6 +27,30 @@ const salesController = {
       id,
       itemsSold: data.sort((prev, curr) => prev.productId - curr.productId),
     });
+  },
+  async edit(req, res) {
+    const { id } = await salesService.validate.paramsId(req.params);
+    const updates = await salesService.validate.body(req.body);
+
+    const result = updates.map(({ productId }) =>
+      productsService.exists(productId));
+    await Promise.all(result);
+
+    await salesService.exists(id);
+    await salesService.edit(id, updates);
+
+    res.status(200).json({
+      saleId: id,
+      itemsUpdated: updates.sort(
+        (prev, curr) => prev.productId - curr.productId,
+      ),
+    });
+  },
+  async remove(req, res) {
+    const { id } = await salesService.validate.paramsId(req.params);
+    await salesService.exists(id);
+    await salesService.remove(id);
+    res.sendStatus(204);
   },
 };
 

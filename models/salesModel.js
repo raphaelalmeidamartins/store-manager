@@ -38,6 +38,14 @@ const salesModel = {
     const [{ insertId }] = await db.query(sqlQuery, [date]);
     return insertId;
   },
+  async remove(id) {
+    const sqlQuery = `
+      DELETE FROM StoreManager.sales
+      WHERE id = ?;
+    `;
+    const [{ affectedRows }] = await db.query(sqlQuery, [id]);
+    return Boolean(affectedRows);
+  },
 };
 
 module.exports = salesModel;
