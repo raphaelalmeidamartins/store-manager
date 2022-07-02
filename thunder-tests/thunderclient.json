@@ -111,5 +111,19 @@
       "form": []
     },
     "tests": []
+  },
+  {
+    "_id": "51648bc8-904a-4646-9303-3c866600bf4e",
+    "colId": "d3719841-27e2-4151-bbb9-ea5d5d400bfb",
+    "containerId": "",
+    "name": "deleteProduct",
+    "url": "http://localhost:3000/products/3",
+    "method": "DELETE",
+    "sortNum": 35000,
+    "created": "2022-07-02T02:13:48.725Z",
+    "modified": "2022-07-02T02:41:07.276Z",
+    "headers": [],
+    "params": [],
+    "tests": []
   }
 ]
