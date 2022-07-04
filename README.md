@@ -56,6 +56,10 @@ Tivemos que criar uma API RESTful usando a arquitetura MSC (Model-Service-Contro
 * Docker
 * MySQL
 
+## :test_tube: Tests Coverage/Cobertura de Testes
+
+![Test Coverage - Cobertura dos testes](./test-coverage.png)
+
 ## :trophy: Grade/Nota
 
 ![My grade of the project - Minha nota no projeto](./nota.png)
