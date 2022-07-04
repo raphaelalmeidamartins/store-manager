@@ -14,7 +14,7 @@ We had to create a RESTful API using MSC (Model-Service-Controller) architecture
 <details>
   <summary markdown="span"><strong>:brazil: Português</strong></summary><br />
 
-Projeto Node.js e Express.js desenvolvido por [Raphael Martins](https://www.linkedin.com/in/raphaelameidamartins/) ao final do Bloco 19 ([Módulo Desenvolvimento Back-end](https://github.com/raphaelalmeidamartins/trybe_exercicios/tree/main/3_Desenvolvimento-Back-end)) do curso de Desenvolvimento Web da Trybe. Fui aprovado com 100% dos requisitos obrigatórios e opcionais atingidos.
+Projeto Node.js e Express.js desenvolvido por [Raphael Martins](https://www.linkedin.com/in/raphaelameidamartins/) ao final do Bloco 23 ([Módulo Desenvolvimento Back-end](https://github.com/raphaelalmeidamartins/trybe_exercicios/tree/main/3_Desenvolvimento-Back-end)) do curso de Desenvolvimento Web da Trybe. Fui aprovado com 100% dos requisitos obrigatórios e opcionais atingidos.
 
 Tivemos que criar uma API RESTful usando a arquitetura MSC (Model-Service-Controller) e implementar testes unitários com Mocha, Chai e Sinon.
 <br />
@@ -47,7 +47,6 @@ Tivemos que criar uma API RESTful usando a arquitetura MSC (Model-Service-Contro
 * Node.js
 * Express.js
 * Express Rescue
-* Body Parser
 * DotEnv
 * Joi
 * Mocha.js
