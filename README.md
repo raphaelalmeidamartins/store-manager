@@ -1,4 +1,4 @@
-# :shopping_cart: Store Manager :shopping_bags:
+# :shopping_cart: Store Manager :department_store:
 
 ## :page_with_curl: About/Sobre
 
