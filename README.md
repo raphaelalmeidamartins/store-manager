@@ -25,7 +25,7 @@ Tivemos que criar uma API RESTful usando a arquitetura MSC (Model-Service-Contro
 <details>
   <summary markdown="span"><strong>:us: English</strong></summary><br />
 
-* Create a Express.js application
+* Create an Express.js application
 * Create a RESTful API using MSC (Model-Service-Controller) architecture
 * Validate requests' data with the Joi library
 * Implement unit tests with Mocha, Chai and Sinon
