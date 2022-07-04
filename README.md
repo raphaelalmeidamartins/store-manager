@@ -61,4 +61,4 @@ Tivemos que criar uma API RESTful usando a arquitetura MSC (Model-Service-Contro
 
 ## :trophy: Grade/Nota
 
-![My grade of the project - Minha nota no projeto](./nota.png)
+![My grade of the project - Minha nota no projeto](./nota2.png)
