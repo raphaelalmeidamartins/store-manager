@@ -135,5 +135,20 @@ describe('Test the productsModel layer', () => {
       const products = await productsModel.search(searchTerm);
       expect(products).to.deep.equal(searchProducts);
     });
+
+    it('should return the array sorted by id', async () => {
+      const mockedProducts = [
+        { id: 3, name: 'Caixa de pandora' },
+        { id: 2, name: 'Sapatos do Sonic' },
+        { id: 1, name: 'Martelo de Tor' },
+      ];
+      const searchTerm = 'o';
+      const searchProducts = mockedProducts
+        .filter(({ name }) => name.match(new RegExp(searchTerm, 'i')))
+        .sort((prev, curr) => prev.id - curr.id);
+      sinon.stub(db, 'query').resolves([searchProducts]);
+      const products = await productsModel.search(searchTerm);
+      expect(products).to.deep.equal(searchProducts);
+    });
   });
 });
