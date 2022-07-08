@@ -5,6 +5,7 @@ const sinon = require('sinon');
 const NotFoundError = require('../../../errors/NotFoundError');
 const productsService = require('../../../services/productsService');
 const productsController = require('../../../controllers/productsController');
+const rescue = require('express-rescue');
 
 use(chaiAsPromised);
 
