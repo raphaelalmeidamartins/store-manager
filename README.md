@@ -1,5 +1,7 @@
 # :shopping_cart: Store Manager :department_store:
 
+![cover](./cover.png)
+
 ## :page_with_curl: About/Sobre
 
 <details>
