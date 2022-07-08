@@ -55,6 +55,98 @@ Tivemos que criar uma API RESTful usando a arquitetura MSC (Model-Service-Contro
 * Docker
 * MySQL
 
+## :hammer_and_wrench: Installation and execution/Instalação e execução
+
+<details>
+  <summary markdown="span"><strong>:us: English</strong></summary><br />
+
+To run this application you need to have **Git**, **Docker** and **Docker Compose** installed on your machine. Docker Compose needs to be at **1.29** version or superior.
+
+### 1 - Clone the repository
+```sh
+git clone git@github.com:raphaelalmeidamartins/store-manager.git
+```
+
+### 2 - Run the containers by running the command below in the application folder
+```sh
+docker-compose up -d
+```
+
+### 3 - Run this command to attach the container to your terminal
+```sh
+docker exec -it store_manager bash
+```
+
+### 4 - On the attached container, install the dependencies and run the application
+
+Install the dependencies:
+```sh
+npm install
+```
+
+Run the application:
+```sh
+npm start
+```
+
+### 5 - Make requests to the server running on the port 3000
+
+Use a HTTP requests client of your choice (Insomnia, Thunder Client, etc) to make requests.
+
+### 6 - Check the tests coverage by running the following command on the attached terminal
+```sh
+npm run test:mocha
+```
+<br />
+</details>
+
+<details>
+  <summary markdown="span"><strong>:brazil: Português</strong></summary><br />
+
+Para rodar está aplicação é necessário ter **Git**, **Docker** e o **Docker Compose** instalados no seu computador. O Docker Compose precisa estar na versão **1.29** ou superior.
+
+### 1 - Clone o repositório
+```sh
+git clone git@github.com:raphaelalmeidamartins/store-manager.git
+```
+
+### 2 - Rode os containers executando o comando abaixo na pasta raiz da aplicação
+```sh
+docker-compose up -d
+```
+
+### 3 - Rode o comando para abrir o terminal do container store_manager
+```sh
+docker exec -it store_manager bash
+```
+
+### 4 - No terminal do container, installe as dependências e execute a aplicação
+
+Instalando dependências:
+```sh
+npm install
+```
+
+Executando aplicação:
+```sh
+npm start
+```
+
+### 5 - Faça requisições para o servidor aberto na porta 3000
+
+Utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
+
+### 6 - Rode o seguinte comando no terminal do container para verificar a cobertura dos testes
+```sh
+npm run test:mocha
+```
+<br />
+</details>
+
+## :books: Documentation/Documentação
+
+_Under development/Em desenvolvimento_
+
 ## :test_tube: Tests Coverage/Cobertura de Testes
 
 ![Test Coverage - Cobertura dos testes](./test-coverage.png)
