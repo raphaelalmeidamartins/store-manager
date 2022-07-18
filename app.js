@@ -1,17 +1,20 @@
 const express = require('express');
+
+const swaggerUI = require('swagger-ui-express');
+const swaggerSettingsBr = require('./swagger-br.json');
+const swaggerSettingsEn = require('./swagger-en.json');
+
 const productsRoutes = require('./routes/productsRoutes');
 const salesRoutes = require('./routes/salesRoutes');
 
 const app = express();
 
-// não remova esse endpoint, é para o avaliador funcionar
 app.get('/', (_request, response) => {
   response.send();
 });
 
-// não remova essa exportação, é para o avaliador funcionar
-// você pode registrar suas rotas normalmente, como o exemplo acima
-// você deve usar o arquivo index.js para executar sua aplicação
+app.use('/docs/br', swaggerUI.serve, swaggerUI.setup(swaggerSettingsBr));
+app.use('/docs/en', swaggerUI.serve, swaggerUI.setup(swaggerSettingsEn));
 
 app.use(express.json());
 

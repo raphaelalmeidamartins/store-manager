@@ -71,7 +71,7 @@ git clone git@github.com:raphaelalmeidamartins/store-manager.git
 
 ### 2 - Run the containers by running the command below in the application folder
 ```sh
-docker-compose up -d
+docker-compose up -d --buid
 ```
 
 ### 3 - Run this command to attach the container to your terminal
@@ -91,9 +91,9 @@ Run the application:
 npm start
 ```
 
-### 5 - Make requests to the server running on the port 3000
+### 5 - Access the documentation and make requests to the server running on the port 3000
 
-Use a HTTP requests client of your choice (Insomnia, Thunder Client, etc) to make requests.
+Access the route http://localhost:3000/docs/en to see the English documentation, and use a HTTP requests client of your choice (Insomnia, Thunder Client, etc) to make requests.
 
 ### 6 - Check the tests coverage by running the following command on the attached terminal
 ```sh
@@ -114,7 +114,7 @@ git clone git@github.com:raphaelalmeidamartins/store-manager.git
 
 ### 2 - Rode os containers executando o comando abaixo na pasta raiz da aplicação
 ```sh
-docker-compose up -d
+docker-compose up -d --build
 ```
 
 ### 3 - Rode o comando para abrir o terminal do container store_manager
@@ -134,9 +134,9 @@ Executando aplicação:
 npm start
 ```
 
-### 5 - Faça requisições para o servidor aberto na porta 3000
+### 5 - Acesse a documentação e faça requisições para o servidor aberto na porta 3000
 
-Utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
+Acesse a rota http://localhost:3000/docs/br para acessar a documentação em português e utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
 
 ### 6 - Rode o seguinte comando no terminal do container para verificar a cobertura dos testes
 ```sh
@@ -147,7 +147,19 @@ npm run test:mocha
 
 ## :books: Documentation/Documentação
 
-_Under development/Em desenvolvimento_
+<details>
+  <summary markdown="span"><strong>:us: English</strong></summary><br />
+
+With the application running, acess the http://localhost:3000/docs/en route on your browser to see the English documentation.
+<br />
+</details>
+
+<details>
+  <summary markdown="span"><strong>:brazil: Português</strong></summary><br />
+
+Com a aplicação em execução, acesse a rota http://localhost:3000/docs/br no navegador para ver a documentação em português.
+<br />
+</details>
 
 ## :test_tube: Tests Coverage/Cobertura de Testes
 

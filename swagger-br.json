@@ -1,0 +1,605 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Store Manager",
+    "description": "Esta API é um sistema de gerenciamento de produtos e vendas",
+    "contact": {
+      "email": "raphael.almeida.martins@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "API de teste"
+    }
+  ],
+  "paths": {
+    "/products": {
+      "get": {
+        "summary": "Listagem de produto",
+        "description": "Esta rota é responsável por listar todos os produtos cadastrados",
+        "tags": ["Products"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                },
+                "examples": {
+                  "products": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "name": "Martelo de Thor"
+                      },
+                      {
+                        "id": 2,
+                        "name": "Traje de encolhimento"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cadastrar um produto",
+        "description": "Esta rota é responsável por cadastrar um novo produto",
+        "tags": ["Products"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterProduct"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "name": "Esmeralda do Chaos"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "examples": {
+                  "product": {
+                    "value": {
+                      "id": 4,
+                      "name": "Esmeralda do Chaos"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "\"name\" is required"
+          },
+          "422": {
+            "description": "\"name\" is invalid"
+          }
+        }
+      }
+    },
+    "/products/search": {
+      "get": {
+        "summary": "Busca um produto pelo nome",
+        "description": "Pesquisar produtos de acordo com o nome fornecido na query. Retorna todos os produtos caso a query esteja vazia",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Nome do produto a ser buscado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Product"
+                  }
+                },
+                "examples": {
+                  "products": {
+                    "value": [
+                      {
+                        "id": 1,
+                        "name": "Martelo de Thor"
+                      },
+                      {
+                        "id": 3,
+                        "name": "Martelo gigante"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{id}": {
+      "get": {
+        "summary": "Buscar produto pelo id",
+        "description": "Retorna produto de acordo com o id fornecido como parâmetro da rota",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do produto a ser buscado"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "examples": {
+                  "product": {
+                    "Value": {
+                      "id": 7,
+                      "name": "Figurino de Toxic"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Some fields are invalid or missing"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza produto",
+        "description": "Atualiza produto de acordo com id fornecido",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do produto a ser atualizado"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterProduct"
+              },
+              "examples": {
+                "product": {
+                  "value": {
+                    "name": "Capa do Batman"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Product"
+                },
+                "examples": {
+                  "product": {
+                    "value": {
+                      "id": 1,
+                      "name": "Capa do Batman"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Some fields are invalid or missing"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Excluir produto",
+        "description": "Exclui produto correspondente ao id fornecido",
+        "tags": ["Products"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": "true",
+            "description": "id do produto a ser deletado"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": "Invalid id",
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/sales": {
+      "get": {
+        "summary": "Listagem de vendas",
+        "description": "Esta rota é responsável por listar todas as vendas cadastradas",
+        "tags": ["Sales"],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListSales"
+                },
+                "examples": {
+                  "sales": {
+                    "value": [
+                      {
+                        "saleId": 1,
+                        "date": "2021-09-09T04:54:29.000Z",
+                        "productId": 1,
+                        "quantity": 2
+                      },
+                      {
+                        "saleId": 1,
+                        "date": "2021-09-09T04:54:54.000Z",
+                        "productId": 2,
+                        "quantity": 2
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Cadastra venda",
+        "description": "Esta rota é responsável por cadastrar uma nova venda",
+        "tags": ["Sales"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterSale"
+              },
+              "examples": {
+                "category": {
+                  "value": [
+                    {
+                      "productId": 1,
+                      "quantity": 1
+                    },
+                    {
+                      "productId": 2,
+                      "quantity": 5
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Sale"
+                },
+                "examples": {
+                  "sale": {
+                    "value": {
+                      "id": 3,
+                      "itemsSold": [
+                        {
+                          "productId": 1,
+                          "quantity": 1
+                        },
+                        {
+                          "productId": 2,
+                          "quantity": 5
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Some fields are invalid or missing"
+          },
+          "422": {
+            "description": "\"quantity\" must be greater than or equal to 1"
+          },
+          "404": {
+            "description": "Product not found"
+          }
+        }
+      }
+    },
+    "/sales/{id}": {
+      "get": {
+        "summary": "Busca venda por id",
+        "description": "Retorna venda corresponente ao id fornecido na rota",
+        "tags": ["Sales"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id da venda a ser buscada"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSaleById"
+                },
+                "examples": {
+                  "listSales": {
+                    "value": [
+                      {
+                        "date": "2021-09-09T04:54:29.000Z",
+                        "productId": 1,
+                        "quantity": 2
+                      },
+                      {
+                        "date": "2021-09-09T04:54:54.000Z",
+                        "productId": 2,
+                        "quantity": 2
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid id"
+          },
+          "404": {
+            "description": "Sale not found"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualiza venda",
+        "description": "Atualiza venda correspondente ao id fornecido",
+        "tags": ["Sales"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id da venda a ser atualizada"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterSale"
+              },
+              "examples": {
+                "product": {
+                  "value": [
+                    {
+                      "productId": 1,
+                      "quantity": 1
+                    },
+                    {
+                      "productId": 2,
+                      "quantity": 5
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditSale"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sale or product not found"
+          },
+          "422": {
+            "description": "\"quantity\" must be greater than or equal to 1"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Exclui uma venda",
+        "description": "Exclui venda de acordo com o id fornecido na rota",
+        "tags": ["Sales"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": "true",
+            "description": "id da venda a ser deletada"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "400": {
+            "description": "Invalid id"
+          },
+          "404": {
+            "description": "Sale not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Product": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RegisterProduct": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ListSales": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "saleId": {
+              "type": "number"
+            },
+            "date": {
+              "type": "string"
+            },
+            "productId": {
+              "type": "number"
+            },
+            "quantity": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "GetSaleById": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "date": {
+              "type": "string"
+            },
+            "productId": {
+              "type": "number"
+            },
+            "quantity": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "RegisterSale": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "productId": {
+              "type": "number"
+            },
+            "quantity": {
+              "type": "number"
+            }
+          }
+        }
+      },
+      "Sale": {
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "itemsSold": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "number"
+                },
+                "quantity": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      },
+      "EditSale": {
+        "properties": {
+          "saleId": {
+            "type": "number"
+          },
+          "itemsUpdated": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productId": {
+                  "type": "number"
+                },
+                "quantity": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
