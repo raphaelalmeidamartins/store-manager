@@ -150,7 +150,7 @@ npm run test:mocha
 <details>
   <summary markdown="span"><strong>:us: English</strong></summary><br />
 
-With the application running, acess the http://localhost:3000/docs/en route on your browser to see the English documentation.
+With the application running, enter the http://localhost:3000/docs/en route on your browser to see the English documentation.
 <br />
 </details>
 
