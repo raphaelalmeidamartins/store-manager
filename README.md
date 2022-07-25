@@ -93,7 +93,7 @@ npm start
 
 ### 5 - Access the documentation and make requests to the server running on the port 3000
 
-Access the route http://localhost:3000/docs/en to see the English documentation, and use a HTTP requests client of your choice (Insomnia, Thunder Client, etc) to make requests.
+Access the route http://localhost:3000/docs/en to see the English documentation and try the API. If you prefer, you can use a HTTP requests client of your choice (Insomnia, Thunder Client, etc) to make requests.
 
 ### 6 - Check the tests coverage by running the following command on the attached terminal
 ```sh
@@ -136,7 +136,7 @@ npm start
 
 ### 5 - Acesse a documentação e faça requisições para o servidor aberto na porta 3000
 
-Acesse a rota http://localhost:3000/docs/br para acessar a documentação em português e utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
+Acesse a rota http://localhost:3000/docs/br para acessar a documentação em português e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
 
 ### 6 - Rode o seguinte comando no terminal do container para verificar a cobertura dos testes
 ```sh
