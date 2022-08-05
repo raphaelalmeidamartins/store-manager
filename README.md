@@ -74,12 +74,22 @@ git clone git@github.com:raphaelalmeidamartins/store-manager.git
 docker-compose up -d --buid
 ```
 
-### 3 - Run this command to attach the container to your terminal
+### 3 - Run the SQL Script to create the database
+
+Connect to the MySQL server running on the 3306 port using a MySQL client of your choice. With the following credentials:
+
+* host: `db`
+* user: `root`
+* password: `password`
+
+Then, in the client, run the scripts in the `migration.sql` and `seed.sql` files.
+
+### 4 - Run this command to attach the container to your terminal
 ```sh
 docker exec -it store_manager bash
 ```
 
-### 4 - On the attached container, install the dependencies and run the application
+### 5 - On the attached container, install the dependencies and run the application
 
 Install the dependencies:
 ```sh
@@ -91,11 +101,11 @@ Run the application:
 npm start
 ```
 
-### 5 - Access the documentation and make requests to the server running on the port 3000
+### 6 - Access the documentation and make requests to the server running on the port 3000
 
 Access the route http://localhost:3000/docs/en to see the English documentation and try the API. If you prefer, you can use a HTTP requests client of your choice (Insomnia, Thunder Client, etc) to make requests.
 
-### 6 - Check the tests coverage by running the following command on the attached terminal
+### 7 - Check the tests coverage by running the following command on the attached terminal
 ```sh
 npm run test:mocha
 ```
@@ -117,12 +127,22 @@ git clone git@github.com:raphaelalmeidamartins/store-manager.git
 docker-compose up -d --build
 ```
 
-### 3 - Rode o comando para abrir o terminal do container store_manager
+### 3 - Execute os scripts SQL para criar o banco de dados
+
+Conecte ao servidor MySQL rodando na porta 3306 usando um cliente MySQL de sua preferência. Utilize as seguintes credenciais:
+
+* host: `db`
+* user: `root`
+* password: `password`
+
+Então, no cliente, execute os scripts que estão nos arquivos `migration.sql` e `seed.sql`.
+
+### 4 - Rode o comando para abrir o terminal do container store_manager
 ```sh
 docker exec -it store_manager bash
 ```
 
-### 4 - No terminal do container, installe as dependências e execute a aplicação
+### 5 - No terminal do container, installe as dependências e execute a aplicação
 
 Instalando dependências:
 ```sh
@@ -134,11 +154,11 @@ Executando aplicação:
 npm start
 ```
 
-### 5 - Acesse a documentação e faça requisições para o servidor aberto na porta 3000
+### 6 - Acesse a documentação e faça requisições para o servidor aberto na porta 3000
 
 Acesse a rota http://localhost:3000/docs/br para acessar a documentação em português e testar a API. Se preferir, utilize um cliente de requisições HTTP de sua preferência (Insomnia, Thunder Client, etc) para fazer as requisições.
 
-### 6 - Rode o seguinte comando no terminal do container para verificar a cobertura dos testes
+### 7 - Rode o seguinte comando no terminal do container para verificar a cobertura dos testes
 ```sh
 npm run test:mocha
 ```
